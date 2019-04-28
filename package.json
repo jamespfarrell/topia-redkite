@@ -18,6 +18,7 @@
     "react-dom": "^16.8.6"
   },
   "devDependencies": {
+    "foundation-sites": "^6.5.3",
     "prettier": "^1.17.0"
   },
   "repository": {
