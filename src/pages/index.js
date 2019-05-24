@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import LandingPage from '../components/LandingPage'
 import SEO from '../components/SEO'
+import axios from 'axios'
 
 const Header = styled.h1`
   @media only screen and (max-width: 375px) {
@@ -95,11 +96,23 @@ export default () => {
   const [status, setStatus] = useState('idle')
   const [errorMsg, setErrorMsg] = useState(null)
 
-  const submitClick = () => {
+  const submitClick = async () => {
     const email = emailInput.current.value
 
     if (validateEmail(email)) {
-      setStatus('success')
+      try {
+        await axios.post('https://api-staging.topia.us/newsletter', { email })
+        setErrorMsg(null)
+        setStatus('success')
+      } catch (e) {
+        if (e.response.status === 409) {
+          setErrorMsg('You are already signed up. You’ll hear from us soon.')
+          setStatus('success')
+        } else {
+          setErrorMsg('Cannot add your email at the moment.')
+          setStatus('error')
+        }
+      }
     } else {
       setErrorMsg('Please check your email again.')
       setStatus('error')
@@ -120,7 +133,7 @@ export default () => {
         placeholder='Your Email'
         disabled={status === 'success'}
       />
-      {status === 'error' && <Prompt>{errorMsg}</Prompt>}
+      {errorMsg && <Prompt>{errorMsg}</Prompt>}
       <SubmitBtn onClick={submitClick} status={status} disabled={status === 'success'}>
         {status === 'success' ? 'Great, we will be in touch soon 🤘🏻' : 'Keep me posted'}
       </SubmitBtn>
