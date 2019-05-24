@@ -1,0 +1,26 @@
+.card
+  border: 0 none
+  border-radius: 0.5em
+  color: $body-font-color
+
+  .card-section
+    padding-bottom: 0.5em
+
+    h3
+      font-weight: bold
+
+  .cell
+    position: relative
+
+  .cell + .cell:before
+    border-left: 2px solid $light-gray
+    content: ''
+    height: 50%
+    left: 0
+    position: absolute
+    transform: translate(0, 50%)
+
+  @media only screen and (max-width: 640px)
+    .cell + .cell:before
+      border-left: 0 none
+      display: none
