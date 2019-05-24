@@ -1,3 +1,4 @@
+#!/bin/bash
 gatsby build
 
 rsync -a --progress ./docker-compose.yml deploy@web-staging.topia.us:/home/deploy/web
