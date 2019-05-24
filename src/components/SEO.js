@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import favicon from '../icons/topiafav.png'
 
 const SEO = ({ title, description, image, pathname, article }) => (
   <StaticQuery
@@ -26,7 +27,15 @@ const SEO = ({ title, description, image, pathname, article }) => (
 
       return (
         <>
-          <Helmet title={seo.title} titleTemplate={titleTemplate}>
+          <Helmet
+            title={seo.title}
+            titleTemplate={titleTemplate}
+            link={[
+              { rel: "icon", type: "image/png", sizes: "16x16", href: `${favicon}` },
+              { rel: "icon", type: "image/png", sizes: "32x32", href: `${favicon}` },
+              { rel: "shortcut icon", type: "image/png", href: `${favicon}` },
+            ]}
+          >
             <meta name="description" content={seo.description} />
             <meta name="image" content={seo.image} />
             {seo.url && <meta property="og:url" content={seo.url} />}
