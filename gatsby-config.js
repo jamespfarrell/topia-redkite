@@ -1,14 +1,16 @@
 module.exports = {
   siteMetadata: {
     title: "We accelerate social impact",
-    titleTemplate: "%s · topia",
+    titleTemplate: "%s - TOPIA",
     description:
-      "We accelerate social impact.",
+      "A data-driven platform to match corporates & NGOs with validated impact.",
     url: "https://topia.us", // No trailing slash allowed!
     twitterUsername: "@topiaHQ",
+    image: '/topia-social-cover.jpg'
   },
   plugins: [
     'gatsby-plugin-sass',
-    `gatsby-plugin-styled-components`
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-react-helmet`
   ]
 }
