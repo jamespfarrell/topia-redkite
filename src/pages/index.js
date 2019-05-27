@@ -30,21 +30,20 @@ const SubHeader = styled.h2`
 
 const EmailInput = styled.input`
   width: 100%;
-  max-width: 331px;
   height: 48px;
   border-radius: 2px;
   background-color: #333;
   font-size: 16px;
   -webkit-appearance: none;
   outline: none;
-  color: #999
-  border: 0;
+  color: #999;
   text-indent: 18px;
   margin-bottom: 16px;
   display: block;
   border: ${props => props.status === 'idle' ? `1px solid #333` : null};
   border: ${props => props.status === 'error' ? `1px solid #ff2a00` : null};
   border: ${props => props.status === 'success' ? `1px solid #13c266` : null};
+  box-sizing: border-box;
 
   &:focus {
     color: #fff;
@@ -55,7 +54,6 @@ const EmailInput = styled.input`
 const SubmitBtn = styled.button`
   display: block;
   width: 100%;
-  max-width: 333px;
   height: 48px;
   border-radius: 2px;
   background-color: ${props => props.status === 'success' ? '#13c266' : '#ffffff'};
