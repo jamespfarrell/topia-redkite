@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import LandingPage from '../components/LandingPage'
 import SEO from '../components/SEO'
 import axios from 'axios'
+import { newsletterUrl } from '../utils/routing'
 
 const Header = styled.h1`
   @media only screen and (max-width: 375px) {
@@ -99,7 +100,7 @@ export default () => {
 
     if (validateEmail(email)) {
       try {
-        await axios.post('https://api-staging.topia.us/newsletter', { email })
+        await axios.post(newsletterUrl, { email })
         setErrorMsg(null)
         setStatus('success')
       } catch (e) {
