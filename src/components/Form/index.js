@@ -82,5 +82,5 @@ export const InputWithLabel = ({label, type, name, handleUpdate}) =>
     <input type={type} name={name} onChange={handleUpdate} />
   </Label>
 
-export const SubmitButton = ({label}) =>
-  <Button type="submit" value={label} />
+export const SubmitButton = ({label, disabled}) =>
+  <Button type="submit" value={label} disabled={disabled} />

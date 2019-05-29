@@ -18,6 +18,7 @@ class Login extends React.Component {
     email: ``,
     password: ``,
     error: null,
+    processing: false
   }
 
   handleUpdate = (event) => {
@@ -28,13 +29,17 @@ class Login extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault()
+    if (this.state.email === '' || this.state.password === '') return
+
+    this.setState({ processing: true })
     const response = await handleLogin(this.state)
     if (response.status === 200) {
-      this.setState({ error: null })
+      this.setState({ error: null, processing: false })
       this.props.store.Login(response.data)
       navigate('/app/welcome')
     } else {
       this.setState({
+        processing: false,
         error: 'Email or password did not match our records. Please double-check and try again.'
       })
     }
@@ -44,6 +49,8 @@ class Login extends React.Component {
     if (this.props.store.isLoggedIn) {
       navigate('/app/welcome')
     }
+
+    const { processing } = this.state
 
     return (
       <AuthLayout>
@@ -68,7 +75,10 @@ class Login extends React.Component {
             name='password'
             handleUpdate={this.handleUpdate}
           />
-          <SubmitButton label="Sign In" />
+          <SubmitButton
+            label={processing ? "Please wait..." : "Sign In"}
+            disabled={processing}
+          />
           <Line />
           <Text>
             Don't have an account yet? <Link to='/imprint'>Apply now</Link>
