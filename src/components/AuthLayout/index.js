@@ -11,21 +11,31 @@ const AuthPageStyle = createGlobalStyle`
   body {
     background-color: #f3f4f6;
     color: #212c30;
+
+    @media only screen and (max-width: 768px) {
+      padding: 0px 16px 0px 16px
+    }
   }
 `
 
 const Container = styled.div`
-  width: 620px;
+  @media only screen and (min-width: 768px) {
+    width: 620px;
+  }
+
   display: flex;
   margin: 0 auto;
   flex-direction: column;
 `
 
 const ContentBox = styled.div`
+  @media only screen and (min-width: 768px) {
+    padding: 48px 80px 48px 80px;
+  }
   border-radius: 8px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 2px 14px 0 rgba(0, 0, 0, 0.05);
   background-color: #ffffff;
-  padding: 48px 80px 48px 80px;
+  padding: 48px 16px 48px 16px;
 
   h1 {
     font-family: Inter;
