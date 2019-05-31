@@ -42,7 +42,7 @@ class Apply extends React.Component {
 
     this.setState({ processing: true })
     const response = await onboardNGO({email, name, orgName})
-    console.log(response)
+
     if (response.status === 200) {
       this.setState({ error: null, processing: false })
       navigate('/ngo/thank-you')
