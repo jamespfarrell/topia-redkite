@@ -8,6 +8,10 @@ class SessionModel {
     return this.CurrentUser.token !== undefined
   }
 
+  get isAdmin() {
+    return this.CurrentUser.user && this.CurrentUser.user.role === 'admin'
+  }
+
   Login(user) {
     this.CurrentUser = user
   }
@@ -20,7 +24,8 @@ decorate(SessionModel, {
   CurrentUser: [observable, persist('object')],
   Login: action,
   Logout: action,
-  isLoggedIn: computed
+  isLoggedIn: computed,
+  isAdmin: computed
 })
 
 const SessionStore = new SessionModel()

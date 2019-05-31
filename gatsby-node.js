@@ -15,4 +15,11 @@ exports.onCreatePage = async ({ page, actions }) => {
     // Update the page.
     createPage(page)
   }
+
+  if (page.path.match(/^\/admin/)) {
+    page.matchPath = `/admin/*`
+
+    // Update the page.
+    createPage(page)
+  }
 }

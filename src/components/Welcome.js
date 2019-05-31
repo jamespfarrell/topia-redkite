@@ -2,6 +2,7 @@ import React from 'react'
 import AuthLayout from './AuthLayout'
 import { inject } from 'mobx-react'
 import { navigate } from '@reach/router'
+import { Link } from 'gatsby'
 
 const Home = ({store}) => {
   const { name } = store.CurrentUser.user
@@ -13,7 +14,8 @@ const Home = ({store}) => {
 
   return (
     <AuthLayout>
-      <p>Welcome back, {name}!</p>
+      <p>Welcome, {name}!</p>
+      {store.isAdmin && <p>Go to <Link to='/admin'>admin panel</Link></p>}
       <p>
         <button onClick={logout}>
           Logout
