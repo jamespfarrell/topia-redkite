@@ -14,7 +14,7 @@ const Label = styled.label`
   font-size: 14px;
   font-weight: 500;
   line-height: 1.57;
-  color: #212c30;
+  color: ${props => props.hasError ? "#ff5500" : "#212c30"};
 
   input {
     margin-top: 8px;
@@ -22,7 +22,7 @@ const Label = styled.label`
     width: 100%;
     height: 48px;
     border-radius: 3px;
-    border: solid 1px #b8bcc3;
+    border: solid 1px ${props => props.hasError ? "#ff5500" : "#b8bcc3"};
     background-color: #ffffff;
     font-size: 16px;
     -webkit-appearance: none;
@@ -76,10 +76,18 @@ export const Text = styled.p`
   }
 `
 
-export const InputWithLabel = ({label, type, name, handleUpdate}) =>
-  <Label>
+export const SubHeader = styled.p`
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #7e808c;
+`
+
+export const InputWithLabel = ({label, type, name, handleUpdate, error}) =>
+  <Label hasError={error}>
     {label}
     <input type={type} name={name} onChange={handleUpdate} />
+    {error && <p>{error}</p>}
   </Label>
 
 export const SubmitButton = ({label, disabled}) =>
