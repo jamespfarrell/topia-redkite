@@ -23,13 +23,17 @@ class Login extends React.Component {
 
   handleUpdate = (event) => {
     this.setState({
+      error: null,
       [event.target.name]: event.target.value,
     })
   }
 
   handleSubmit = async (event) => {
     event.preventDefault()
-    if (this.state.email === '' || this.state.password === '') return
+    if (this.state.email === '' || this.state.password === '') {
+      this.setState({error: 'Please provide email and password'})
+      return
+    }
 
     this.setState({ processing: true })
     const response = await handleLogin(this.state)
@@ -81,10 +85,7 @@ class Login extends React.Component {
           />
           <Line />
           <Text>
-            Don't have an account yet? <Link to='/imprint'>Apply now</Link>
-          </Text>
-          <Text>
-            <Link to='/imprint'>I forgot my password</Link>
+            Don't have an account yet? <Link to='/ngo/apply'>Apply now</Link>
           </Text>
         </form>
       </AuthLayout>
