@@ -10,7 +10,6 @@ const App = () => (
   <Router>
     <PrivateRoute path="/app/welcome" component={Welcome} />
     <Login path="/app/login" />
-    <Login path="/app/login" />
     <ActivateAccount path='/app/activate/:token' />
   </Router>
 )
