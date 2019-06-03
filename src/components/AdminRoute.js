@@ -6,7 +6,7 @@ class AdminRoute extends React.Component {
   render() {
     const { component: Component, store, location, ...rest } = this.props
 
-    if (!store.isLoggedIn && !store.isAdmin) {
+    if (typeof window !== `undefined` && !store.isLoggedIn && !store.isAdmin) {
       // If we’re not logged in, redirect to the home page.
       navigate(`/app/login`)
       return null
