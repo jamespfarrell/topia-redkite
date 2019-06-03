@@ -9,3 +9,5 @@ export const adminActivateUserUrl = (userId) =>
   `${API_URL}/admin/user/${userId}/activate`
 export const adminDectivateUserUrl = (userId) =>
   `${API_URL}/admin/user/${userId}/deactivate`
+export const adminNewsletterEmailsUrl = `${API_URL}/admin/newsletter_emails`
+export const adminOrganizationsUrl = `${API_URL}/organisations`

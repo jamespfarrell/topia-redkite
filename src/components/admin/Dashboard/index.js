@@ -2,11 +2,11 @@ import React from 'react'
 import { inject } from 'mobx-react'
 
 const Dashboard = ({store}) => {
-  const { name } = store.CurrentUser.user
+  const { user } = store.CurrentUser
 
   return (
     <React.Fragment>
-      <p>Welcome, {name}!</p>
+      {user && <p>Welcome, {user.name}!</p>}
     </React.Fragment>
   )
 }
