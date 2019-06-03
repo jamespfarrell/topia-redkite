@@ -98,14 +98,34 @@ const TopiaLogo = styled.img`
 `
 
 const Top = styled.div`
-@media only screen and (max-width: 768px) {
-  text-align: center;
-  margin-top: 36px;
-}
+  @media only screen and (max-width: 768px) {
+    text-align: center;
+    margin-top: 36px;
+  }
+`
+
+const RightMenu = styled.div`
+  display: none;
+
+  @media only screen and (min-width: 768px) {
+    display: block;
+    position: absolute;
+    right: 16px;
+    top: 32px;
+    font-size: 16px;
+    font-weight: bold;
+
+    a {
+      color: #ffffff;
+    }
+  }
 `
 
 export default ({children}) => (
   <React.Fragment>
+    <RightMenu>
+      <Link to='/app/login'>Login</Link>
+    </RightMenu>
     <Container>
       <Top>
         <Link to='/'><TopiaLogo src={topiaSvg} alt='Topia - We accelerate social impact' /></Link>
