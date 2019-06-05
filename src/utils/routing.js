@@ -11,3 +11,5 @@ export const adminDectivateUserUrl = (userId) =>
   `${API_URL}/admin/user/${userId}/deactivate`
 export const adminNewsletterEmailsUrl = `${API_URL}/admin/newsletter_emails`
 export const adminOrganizationsUrl = `${API_URL}/organisations`
+export const userUrl = `${API_URL}/user`
+export const avatarApiUrl = filename => `${API_URL}/uploads/users/${filename}`
