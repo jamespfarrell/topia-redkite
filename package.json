@@ -22,8 +22,9 @@
     "gatsby-plugin-sass": "^2.0.11",
     "gatsby-plugin-styled-components": "^3.0.7",
     "mobx": "^5.9.4",
+    "mobx-devtools-mst": "^0.9.21",
     "mobx-persist": "^0.4.1",
-    "mobx-react": "^5.4.4",
+    "mobx-react": "^6.0.3",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-awesome-styled-grid": "^2.2.5",
@@ -33,7 +34,6 @@
   },
   "devDependencies": {
     "foundation-sites": "^6.5.3",
-    "mobx-react-devtools": "^6.1.1",
     "prettier": "^1.17.0"
   },
   "repository": {
