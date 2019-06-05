@@ -16,6 +16,10 @@ class SessionModel {
     this.CurrentUser = user
   }
 
+  UpdateProfile(data) {
+    this.CurrentUser.user = data
+  }
+
   Logout() {
     this.CurrentUser = {}
   }
@@ -24,6 +28,7 @@ decorate(SessionModel, {
   CurrentUser: [observable, persist('object')],
   Login: action,
   Logout: action,
+  UpdateProfile: action,
   isLoggedIn: computed,
   isAdmin: computed
 })

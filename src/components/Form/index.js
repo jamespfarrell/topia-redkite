@@ -83,10 +83,60 @@ export const SubHeader = styled.p`
   color: #7e808c;
 `
 
-export const InputWithLabel = ({label, type, name, handleUpdate, error}) =>
+export const GrayButton = styled.button`
+  width: 179px;
+  height: 40px;
+  border-radius: 4px;
+  border: solid 1px #7e808c;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.57;
+  color: #7e808c;
+
+  &:hover {
+    color: #383a44;
+    border: solid 1px #383a44;
+  }
+`
+
+const UploadContainer = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+
+  input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+`
+
+export const ConfirmationBar = styled.div`
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 64px;
+  opacity: 0.9;
+  background-color: #13c266;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const UploadInput = ({children, handler, name}) =>
+  <UploadContainer>
+    <GrayButton>{children}</GrayButton>
+    <input type="file" name={name} onChange={handler} />
+  </UploadContainer>
+
+export const InputWithLabel = ({value, label, type, name, handleUpdate, error}) =>
   <Label hasError={error}>
     {label}
-    <input type={type} name={name} onChange={handleUpdate} />
+    <input type={type} name={name} onChange={handleUpdate} value={value} />
     {error && <p>{error}</p>}
   </Label>
 
