@@ -4,25 +4,21 @@ import { ConfirmationBar, Line, UploadInput, InputWithLabel, SubmitButton } from
 import { Card, Preview } from './Card'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import BannerSvg from '../../assets/svgs/banner-default.svg'
-import { updateProfile } from '../../utils/user'
-import { userImageApiUrl } from '../../utils/routing'
+import { updateOrganization } from '../../utils/organization'
 
-const Basic = ({store}) => {
+const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
   const { token } = store.CurrentUser
-  const { name, email, avatarFilename, bannerFilename } = store.CurrentUser.user
-  const [userParams, setUserParams] = useState({
-    name,
-    email,
-    avatarUrl: userImageApiUrl(avatarFilename),
-    bannerUrl: userImageApiUrl(bannerFilename)
+  const [orgParams, setOrgParams] = useState({
+    id, name, logoUrl, bannerUrl
   })
   const [ showConfirmation, setConfirmation] = useState(false)
 
-  const handleUserFileUpload = e => {
+  const handleOrganizationFileUpload = e => {
     const file = e.target.files[0]
-    const urlParam = e.target.name === 'avatarFile' ? 'avatarUrl' : 'bannerUrl'
-    setUserParams({
-      ...userParams,
+    console.log(file)
+    const urlParam = e.target.name === 'logoFile' ? 'logoUrl' : 'bannerUrl'
+    setOrgParams({
+      ...orgParams,
       [e.target.name]: file,
       [urlParam]: URL.createObjectURL(file)
     })
@@ -30,16 +26,15 @@ const Basic = ({store}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await updateProfile({ token, ...userParams })
-    store.UpdateProfile(response)
-    setConfirmation(true)
-    setTimeout(() => setConfirmation(false), 3000) // close after 3 sec.
+    const response = await updateOrganization({ token, id, ...orgParams })
+    if(response.status === 200) {
+      setConfirmation(true)
+      setTimeout(() => setConfirmation(false), 3000) // close after 3 sec.
+    }
   }
 
   const handleUpdate = (e) => {
-    const params = {...userParams}
-    params[e.target.name] = e.target.value
-    setUserParams(params)
+    setOrgParams({ ...orgParams, [e.target.name]: e.target.value })
   }
 
   return (
@@ -49,8 +44,8 @@ const Basic = ({store}) => {
     </ConfirmationBar>}
     <div className='header'>
       <div>
-        <h1>Profile</h1>
-        <p>Upload a profile picture or edit profile details here.</p>
+        <h1>Organization</h1>
+        <p>You can change your organization details here.</p>
       </div>
       <div style={{width: '90px'}}>
         <SubmitButton label='Save' />
@@ -58,16 +53,17 @@ const Basic = ({store}) => {
     </div>
 
     <Line />
+    <a href="#organization" id="organization"></a>
     <div className='row' style={{marginTop: '42px', marginBottom: '42px'}}>
       <div className='col' style={{marginRight: '24px'}}>
-        <b>Profile picture</b>
+        <b>Organization picture</b>
 
         <div className='row'>
           <div className='col' style={{marginRight: '24px'}}>
-            {userParams.avatarUrl ? <Preview url={userParams.avatarUrl} /> : <AvatarSvg />}
+            {orgParams.logoUrl ? <Preview url={orgParams.logoUrl} /> : <AvatarSvg />}
           </div>
           <div className='col'>
-            <UploadInput handler={handleUserFileUpload} name='avatarFile'>
+            <UploadInput handler={handleOrganizationFileUpload} name='logoFile'>
               Upload new picture
             </UploadInput>
             <p>Recommended: 200x200px, max. size 2MB</p>
@@ -75,14 +71,14 @@ const Basic = ({store}) => {
         </div>
       </div>
       <div className='col'>
-        <b>Profile banner</b>
+        <b>Organization banner</b>
 
         <div className='row'>
           <div className='col' style={{marginRight: '24px'}}>
-            {userParams.bannerUrl ? <Preview url={userParams.bannerUrl} /> : <BannerSvg />}
+            {orgParams.bannerUrl ? <Preview url={orgParams.bannerUrl} /> : <BannerSvg />}
           </div>
           <div className='col'>
-            <UploadInput handler={handleUserFileUpload} name='bannerFile'>
+            <UploadInput handler={handleOrganizationFileUpload} name='bannerFile'>
               Upload new banner
             </UploadInput>
             <p>Recommended: 1200x480px, max. size 5MB</p>
@@ -92,11 +88,16 @@ const Basic = ({store}) => {
     </div>
     <Line />
     <div style={{width: '407px'}}>
-      <InputWithLabel handleUpdate={handleUpdate} value={userParams.name} label='Name' type='text' name='name' />
-      <InputWithLabel handleUpdate={handleUpdate} value={userParams.email} label='Email' type='email' name='email' />
+      <InputWithLabel
+        handleUpdate={handleUpdate}
+        value={orgParams.name}
+        label='Organization name'
+        type='text'
+        name='name'
+      />
     </div>
   </Card>
   )
 }
 
-export default inject(`store`)(observer(Basic))
+export default inject(`store`)(observer(Organization))

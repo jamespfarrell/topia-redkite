@@ -1,14 +1,17 @@
-import React from 'react'
-import { inject } from 'mobx-react'
+import React, { useState, useEffect } from 'react'
+import { inject, observer } from 'mobx-react'
 import { Link } from 'gatsby'
 import styled, { createGlobalStyle } from 'styled-components'
 import Basic from './Profile/Basic'
+import Account from './Profile/Account'
+import Organization from './Profile/Organization'
 import TopiaSvg from '../assets/svgs/topia.svg'
 import AvatarSvg from '../assets/svgs/user-avatar-default.svg'
 import NotificationIcon from '../assets/svgs/icon-notification.svg'
 import HelpIcon from '../assets/svgs/icon-help.svg'
-import { avatarApiUrl } from '../utils/routing'
+import { userImageApiUrl } from '../utils/routing'
 import SEO from './SEO'
+import { getOrganizations } from '../utils/user'
 
 
 const ProfilePageStyle = createGlobalStyle`
@@ -83,6 +86,7 @@ const Container = styled.div`
 
     ul {
       list-style: none;
+      position: fixed;
       margin: 10px 10px 10px 150px;
       li {
         a {
@@ -108,11 +112,32 @@ const Container = styled.div`
   }
 `
 
+const MiniAvatar = inject(`store`)(
+    observer(
+      ({store}) => {
+        const { avatarFilename } = store.CurrentUser.user
+        const avatar = avatarFilename
+          ? <div id='avatar' style={{backgroundImage: `url(${userImageApiUrl(avatarFilename)})`}}></div>
+          : <AvatarSvg style={{width: '24px'}} />
+
+        return avatar
+      }
+    )
+  )
+
+
 const Profile = ({store}) => {
-  const { avatarFilename } = store.CurrentUser.user
-  const avatar = avatarFilename
-    ? <div id='avatar' style={{backgroundImage: `url(${avatarApiUrl(avatarFilename)})`}}></div>
-    : <AvatarSvg style={{width: '24px'}} />
+  const { token } = store.CurrentUser
+  const [organizations, setOrganizations ]= useState([])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getOrganizations({ token })
+      setOrganizations(response.data)
+    }
+
+    fetchData()
+  }, [])
 
   return (
     <React.Fragment>
@@ -128,21 +153,31 @@ const Profile = ({store}) => {
           <NotificationIcon />
           <HelpIcon/>
           <Divider />
-          {avatar}
+          <MiniAvatar />
         </div>
       </Navbar>
       <Container>
         <div id="menu">
           <ul>
-            <li><Link to='/'>Profile</Link></li>
-            <li><Link to='/'>Organization</Link></li>
-            <li><Link to='/'>Account</Link></li>
-            <li><Link to='/'>Logout</Link></li>
+            <li><Link to='/app/profile#profile'>Profile</Link></li>
+            <li><Link to='/app/profile#organization'>Organization</Link></li>
+            <li><Link to='/app/profile#account'>Account</Link></li>
+            <li><Link to='/app/logout'>Logout</Link></li>
           </ul>
         </div>
 
         <div id='content'>
+          <a id="#profile"></a>
           <Basic />
+          {organizations.map(org => <Organization
+            key={org.id}
+            id={org.id}
+            name={org.name}
+            logoUrl={org.logoUrl}
+            bannerUrl={org.bannerUrl}
+          />)}
+          <a id="#organization"></a>
+          <Account />
         </div>
       </Container>
       <ProfilePageStyle/>

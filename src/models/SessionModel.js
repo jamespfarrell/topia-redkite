@@ -41,7 +41,7 @@ if (typeof window !== `undefined`) {
     jsonify: true
   })
 
-  hydrate('store', SessionStore).then(() => console.log('someStore has been hydrated'))
+  hydrate('store', SessionStore).then(() => console.log('store has been hydrated'))
 }
 
 
