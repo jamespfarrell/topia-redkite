@@ -60,7 +60,7 @@ class Apply extends React.Component {
   }
 
   render() {
-    if (this.props.store.isLoggedIn) { navigate('/app/welcome') }
+    if (this.props.store.isLoggedIn) { navigate('/app/profile') }
 
     const { processing, errors } = this.state
 

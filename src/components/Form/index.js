@@ -61,7 +61,7 @@ export const Line = styled.div`
   height: 1px;
   opacity: 0.2;
   background-color: #7e808c;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 `
 
 export const Text = styled.p`
@@ -114,7 +114,7 @@ const UploadContainer = styled.div`
 `
 
 export const ConfirmationBar = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0px;
   left: 0px;
   width: 100%;

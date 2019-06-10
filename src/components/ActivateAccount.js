@@ -54,7 +54,7 @@ class Apply extends React.Component {
     if (response.status === 200) {
       this.setState({ error: null, processing: false })
       this.props.store.Login(response.data)
-      navigate('/app/welcome')
+      navigate('/app/profile')
     } else if (response.statusCode === 409) {
       this.setState({
         processing: false,
@@ -69,7 +69,7 @@ class Apply extends React.Component {
   }
 
   render() {
-    if (this.props.store.isLoggedIn) { navigate('/app/welcome') }
+    if (this.props.store.isLoggedIn) { navigate('/app/profile') }
 
     const { processing, errors } = this.state
 
