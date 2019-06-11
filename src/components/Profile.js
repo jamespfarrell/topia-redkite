@@ -164,6 +164,7 @@ const Profile = ({store}) => {
       <Container>
         <div id="menu">
           <ul>
+            {store.isAdmin && <li><Link to='/admin'>Admin panel</Link></li>}
             <li><Link to='/app/profile#profile'>Profile</Link></li>
             <li><Link to='/app/profile#organization'>Organization</Link></li>
             <li><Link to='/app/profile#account'>Account</Link></li>
