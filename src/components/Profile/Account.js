@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
 import { ConfirmationBar, Line, InputWithLabel, SubmitButton } from '../Form'
-import { Card, GrayLink } from './Card'
+import { Card, GrayLink, FormContainer, SaveBtnContainer } from './Card'
 import { updateProfile } from '../../utils/user'
 import { isEmpty } from 'ramda'
 
@@ -60,17 +60,17 @@ const Account = ({store}) => {
         <h1>Account</h1>
         <p>Change your email or password here..</p>
       </div>
-      <div style={{width: '90px'}}>
+      <SaveBtnContainer>
         <SubmitButton label='Save' />
-      </div>
+      </SaveBtnContainer>
     </div>
     <a href="#account" id="account"></a>
     <Line />
-    <div style={{width: '407px'}}>
+    <FormContainer>
       <InputWithLabel handleUpdate={handleUpdate} value={userParams.email} label='Email' type='email' name='email' />
-    </div>
+    </FormContainer>
     <Line />
-    <div style={{width: '407px'}}>
+    <FormContainer>
       <InputWithLabel
         error={errors.currentPassword}
         handleUpdate={handleUpdate}
@@ -91,16 +91,16 @@ const Account = ({store}) => {
         type='password'
         name='verifyPassword'
       />
-    </div>
+    </FormContainer>
     <Line />
-    <div style={{width: '407px'}}>
+    <FormContainer>
       <b>Delete Account</b>
       <p>
         You can request the deletion of your account here and after 7 days your
         account will be automatically deleted. Note that this action can’t be undone.
       </p>
       <GrayLink href='/'>Request Account Deletion</GrayLink>
-    </div>
+    </FormContainer>
   </Card>
   )
 }

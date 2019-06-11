@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
 import { ConfirmationBar, Line, UploadInput, InputWithLabel, SubmitButton } from '../Form'
-import { Card, Preview } from './Card'
+import { Card, Preview, FormContainer, SaveBtnContainer } from './Card'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import BannerSvg from '../../assets/svgs/banner-default.svg'
 import { updateOrganization } from '../../utils/organization'
@@ -47,9 +47,9 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
         <h1>Organization</h1>
         <p>You can change your organization details here.</p>
       </div>
-      <div style={{width: '90px'}}>
+      <SaveBtnContainer>
         <SubmitButton label='Save' />
-      </div>
+      </SaveBtnContainer>
     </div>
 
     <Line />
@@ -87,7 +87,7 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
       </div>
     </div>
     <Line />
-    <div style={{width: '407px'}}>
+    <FormContainer>
       <InputWithLabel
         handleUpdate={handleUpdate}
         value={orgParams.name}
@@ -95,7 +95,7 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
         type='text'
         name='name'
       />
-    </div>
+    </FormContainer>
   </Card>
   )
 }

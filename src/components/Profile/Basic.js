@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
 import { ConfirmationBar, Line, UploadInput, InputWithLabel, SubmitButton } from '../Form'
-import { Card, Preview } from './Card'
+import { Card, Preview, FormContainer, SaveBtnContainer } from './Card'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import BannerSvg from '../../assets/svgs/banner-default.svg'
 import { updateProfile } from '../../utils/user'
@@ -52,9 +52,9 @@ const Basic = ({store}) => {
         <h1>Profile</h1>
         <p>Upload a profile picture or edit profile details here.</p>
       </div>
-      <div style={{width: '90px'}}>
+      <SaveBtnContainer>
         <SubmitButton label='Save' />
-      </div>
+      </SaveBtnContainer>
     </div>
 
     <Line />
@@ -91,10 +91,10 @@ const Basic = ({store}) => {
       </div>
     </div>
     <Line />
-    <div style={{width: '407px'}}>
+    <FormContainer>
       <InputWithLabel handleUpdate={handleUpdate} value={userParams.name} label='Name' type='text' name='name' />
       <InputWithLabel handleUpdate={handleUpdate} value={userParams.email} label='Email' type='email' name='email' />
-    </div>
+    </FormContainer>
   </Card>
   )
 }

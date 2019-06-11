@@ -16,6 +16,10 @@ const Label = styled.label`
   line-height: 1.57;
   color: ${props => props.hasError ? "#ff5500" : "#212c30"};
 
+  p {
+    color: ${props => props.hasError ? "#ff5500" : "#212c30"};
+  }
+
   input {
     margin-top: 8px;
     display: block;
