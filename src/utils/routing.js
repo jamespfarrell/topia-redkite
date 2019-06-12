@@ -1,4 +1,13 @@
+import axios from 'axios'
+
 const API_URL = process.env.API_URL
+
+export const get = async (route, token, params = {}) =>
+  await axios.get(route, {
+    headers: {
+      'Authorization': token
+    }
+  })
 
 export const newsletterUrl = `${API_URL}/newsletter`
 export const userLoginUrl = `${API_URL}/user/login`
@@ -11,3 +20,7 @@ export const adminDectivateUserUrl = (userId) =>
   `${API_URL}/admin/user/${userId}/deactivate`
 export const adminNewsletterEmailsUrl = `${API_URL}/admin/newsletter_emails`
 export const adminOrganizationsUrl = `${API_URL}/organisations`
+export const userUrl = `${API_URL}/user`
+export const userImageApiUrl = filename => `${API_URL}/uploads/users/${filename}`
+export const userOrganizations = `${API_URL}/user/organizations`
+export const organizationUrl = id => `${API_URL}/organisations/${id}`

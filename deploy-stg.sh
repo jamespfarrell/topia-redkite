@@ -1,4 +1,5 @@
 #!/bin/bash
+rm -rf .cache
 rm -rf ./public
 gatsby build
 ssh deploy@web-staging.topia.us 'rm -rf /home/deploy/web/public'

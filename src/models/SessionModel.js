@@ -16,6 +16,10 @@ class SessionModel {
     this.CurrentUser = user
   }
 
+  UpdateProfile(data) {
+    this.CurrentUser.user = data
+  }
+
   Logout() {
     this.CurrentUser = {}
   }
@@ -24,6 +28,7 @@ decorate(SessionModel, {
   CurrentUser: [observable, persist('object')],
   Login: action,
   Logout: action,
+  UpdateProfile: action,
   isLoggedIn: computed,
   isAdmin: computed
 })
@@ -36,7 +41,7 @@ if (typeof window !== `undefined`) {
     jsonify: true
   })
 
-  hydrate('store', SessionStore).then(() => console.log('someStore has been hydrated'))
+  hydrate('store', SessionStore).then(() => console.log('store has been hydrated'))
 }
 
 
