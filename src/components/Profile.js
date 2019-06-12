@@ -83,11 +83,14 @@ const Container = styled.div`
 
   #menu {
     width: 368px;
+    @media only screen and (max-width: 1028px) {
+      display: none;
+    }
 
     ul {
       list-style: none;
       position: fixed;
-      margin: 10px 10px 10px 150px;
+      margin: 10px 10px 10px 120px;
       li {
         a {
           font-size: 14px;
@@ -96,10 +99,12 @@ const Container = styled.div`
           color: #959ba6;
           text-decoration: none;
           display: block;
-          padding: 13px 0px 13px 0px;
+          padding: 13px 26px 13px 26px;
 
           &:hover {
             color: #212c30;
+            background: #E8E9EB;
+            border-radius: 3px;
           }
         }
       }
@@ -159,6 +164,7 @@ const Profile = ({store}) => {
       <Container>
         <div id="menu">
           <ul>
+            {store.isAdmin && <li><Link to='/admin'>Admin panel</Link></li>}
             <li><Link to='/app/profile#profile'>Profile</Link></li>
             <li><Link to='/app/profile#organization'>Organization</Link></li>
             <li><Link to='/app/profile#account'>Account</Link></li>

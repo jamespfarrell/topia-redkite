@@ -2,7 +2,7 @@ import axios from 'axios'
 import * as routing from './routing'
 
 const put = async (route, token, params = {}) =>
-  await axios.put(route, {
+  await axios.put(route, params, {
     headers: {
       'Authorization': token
     }

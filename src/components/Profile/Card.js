@@ -47,6 +47,7 @@ export const Card = styled.form`
   .row {
     display: flex;
     margin-top: 16px;
+    flex-wrap: wrap;
 
     .col {
     }
@@ -57,6 +58,20 @@ const PreviewDiv = styled.div`
   width: 80px;
   height: 80px;
   background-size: cover;
+  margin-bottom: 24px;
+`
+
+export const FormContainer = styled.div`
+  width: 408px;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
+`
+
+export const SaveBtnContainer = styled.div`
+  width: 90px;
+  margin-left: 24px;
 `
 
 export const Preview = ({url}) =>
