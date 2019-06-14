@@ -61,6 +61,25 @@ const Button = styled.input`
   }
 `
 
+export const SuccessButton = styled.button`
+  border-radius: 3px;
+  border: 1px solid #13c266;
+  background-color: #13c266;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  color: #ffffff;
+  width: 100%;
+  margin-top: 16px;
+  margin-bottom: 32px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`
+
 export const Line = styled.div`
   height: 1px;
   opacity: 0.2;

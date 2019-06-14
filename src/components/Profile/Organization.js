@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
-import { ConfirmationBar, Line, UploadInput, InputWithLabel, SubmitButton } from '../Form'
+import { navigate } from 'gatsby'
+import { ConfirmationBar, Line, UploadInput, InputWithLabel, SuccessButton, SubmitButton } from '../Form'
 import { Card, Preview, FormContainer, SaveBtnContainer } from './Card'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import BannerSvg from '../../assets/svgs/banner-default.svg'
@@ -96,6 +97,8 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
         name='name'
       />
     </FormContainer>
+    <Line />
+    <SuccessButton onClick={() => navigate(`/app/organizations/${id}/project/new`)}>Add project</SuccessButton>
   </Card>
   )
 }
