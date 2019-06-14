@@ -33,6 +33,7 @@
     "react-awesome-styled-grid": "^2.2.5",
     "react-datepicker": "^2.7.0",
     "react-dom": "^16.8.6",
+    "react-facebook": "^8.0.4",
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.4.0",
     "react-tooltip": "^3.10.0",

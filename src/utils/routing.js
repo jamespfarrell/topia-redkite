@@ -27,3 +27,4 @@ export const userProjects = `${API_URL}/user/projects`
 export const organizationUrl = id => `${API_URL}/organisations/${id}`
 export const organizationProjectUrl = id => `${API_URL}/organisations/${id}/projects`
 export const sdgTargetsUrl = `${API_URL}/sdg_targets`
+export const oauthFacebookUrl = `${API_URL}/oauth/facebook`
