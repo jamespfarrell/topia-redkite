@@ -2,20 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Autosuggest from 'react-autosuggest'
 import { Map, Marker, TileLayer, Polygon } from 'react-leaflet'
-import L from 'leaflet'
-import "leaflet/dist/leaflet.css"
-
-import marker from 'leaflet/dist/images/marker-icon.png'
-import marker2x from 'leaflet/dist/images/marker-icon-2x.png'
-import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-
-delete L.Icon.Default.prototype._getIconUrl
-
-L.Icon.Default.mergeOptions({
-    iconRetinaUrl: marker2x,
-    iconUrl: marker,
-    shadowUrl: markerShadow
-})
 
 const getSuggestionValue = suggestion => suggestion.text
 

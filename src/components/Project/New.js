@@ -96,7 +96,7 @@ const New = ({store, orgId}) => {
           />
         <FormContainer>
         <p><b>Location</b></p>
-          <Map polygon={projectParams.coordinates} setPolygon={setPolygon} />
+        <Map polygon={projectParams.coordinates} setPolygon={setPolygon} />
         </FormContainer>
       </Card>
     </UserLayout>
