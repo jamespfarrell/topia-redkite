@@ -4,6 +4,7 @@ import SEO from '../SEO'
 import UserLayout from '../UserLayout'
 import { userProjects } from '../../utils/routing'
 import axios from 'axios'
+import { Link } from 'gatsby'
 
 const All = ({store}) => {
   const { token } = store.CurrentUser
@@ -26,7 +27,7 @@ const All = ({store}) => {
   return (
     <UserLayout>
       <SEO title='All projects' />
-      {projects.map(proj => <p>{proj.name}</p>)}
+      {projects.map(proj => <p key={proj.id}><Link to={`/app/projects/${proj.id}/edit`}>{proj.name}</Link></p>)}
     </UserLayout>
   )
 }

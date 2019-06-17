@@ -8,6 +8,7 @@ import Login from "../components/Login"
 import PrivateRoute from "../components/PrivateRoute"
 import ActivateAccount from "../components/ActivateAccount"
 import NewProject from '../components/Project/New'
+import EditProject from '../components/Project/Edit'
 import AllProjects from '../components/Project/All'
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
     <PrivateRoute path="/app/welcome" component={Welcome} />
     <PrivateRoute path="/app/logout" component={Logout} />
     <PrivateRoute path="/app/projects" component={AllProjects} />
+    <PrivateRoute path="/app/projects/:projectId/edit" component={EditProject} />
     <PrivateRoute path="/app/organizations/:orgId/project/new" component={NewProject} />
     <Login path="/app/login" />
     <ActivateAccount path='/app/activate/:token' />
