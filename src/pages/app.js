@@ -10,6 +10,10 @@ import ActivateAccount from "../components/ActivateAccount"
 import NewProject from '../components/Project/New'
 import EditProject from '../components/Project/Edit'
 import AllProjects from '../components/Project/All'
+import NgoPage from '../components/NGO/Page'
+import NgoProjects from '../components/NGO/Project'
+import NgoDonors from '../components/NGO/Donors'
+import NgoAbout from '../components/NGO/About'
 
 const App = () => (
   <Router>
@@ -21,6 +25,10 @@ const App = () => (
     <PrivateRoute path="/app/organizations/:orgId/project/new" component={NewProject} />
     <Login path="/app/login" />
     <ActivateAccount path='/app/activate/:token' />
+    <NgoPage path='/app/ngo/:id' />
+    <NgoProjects path='/app/ngo/:id/projects' />
+    <NgoDonors path='/app/ngo/:id/donors' />
+    <NgoAbout path='/app/ngo/:id/about' />
   </Router>
 )
 
