@@ -23,4 +23,9 @@ export const adminOrganizationsUrl = `${API_URL}/organisations`
 export const userUrl = `${API_URL}/user`
 export const userImageApiUrl = filename => `${API_URL}/uploads/users/${filename}`
 export const userOrganizations = `${API_URL}/user/organizations`
+export const userProjects = `${API_URL}/user/projects`
 export const organizationUrl = id => `${API_URL}/organisations/${id}`
+export const organizationProjectUrl = id => `${API_URL}/organisations/${id}/projects`
+export const sdgTargetsUrl = `${API_URL}/sdg_targets`
+export const oauthFacebookUrl = `${API_URL}/oauth/facebook`
+export const projectUrl = (id) => `${API_URL}/projects/${id}`

@@ -9,6 +9,12 @@ module.exports = {
     image: '/topia-social-cover.jpg'
   },
   plugins: [
+    {
+      resolve: 'gatsby-plugin-react-leaflet',
+      options: {
+        linkStyles: true // (default: true) Enable/disable loading stylesheets via CDN
+      }
+    },
     'gatsby-plugin-sass',
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
