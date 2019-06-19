@@ -8,7 +8,7 @@ export const ErrMsg = styled.p`
   text-align: center;
 `
 
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   font-family: Inter;
   font-size: 14px;
@@ -20,7 +20,7 @@ const Label = styled.label`
     color: ${props => props.hasError ? "#ff5500" : "#212c30"};
   }
 
-  input {
+  input, select {
     margin-top: 8px;
     display: block;
     width: 100%;

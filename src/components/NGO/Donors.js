@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import SEO from '../SEO'
 import { getOrganization } from '../../utils/organization'
+import { userImageApiUrl } from '../../utils/routing'
 
 const SubMenu = styled.div`
   width: 100%;
@@ -59,6 +60,7 @@ const Img = styled.div `
   border-radius: 6px;
   background-color: #000000;
   margin-bottom: 16px;
+  background-size: cover;
 `
 
 const DonorCard = styled.div`
@@ -97,7 +99,7 @@ const DonorCard = styled.div`
 `
 
 const Page = (props) => {
-  const [ org, setOrg ] = React.useState({name: '', projects: []})
+  const [ org, setOrg ] = React.useState({name: '', transactions: [], projects: []})
 
   React.useEffect(() => {
     const fetchOrganization = async () => {
@@ -119,33 +121,13 @@ const Page = (props) => {
     </ul>
   </SubMenu>
   <DonorList>
-    <DonorCard>
-      <Img />
-      <h2>Deloitte</h2>
-      <h3>Management Consulting</h3>
-      <b>$555.000</b>
-    </DonorCard>
-
-    <DonorCard>
-      <Img />
-      <h2>Deloitte</h2>
-      <h3>Management Consulting</h3>
-      <b>$555.000</b>
-    </DonorCard>
-
-    <DonorCard>
-      <Img />
-      <h2>Deloitte</h2>
-      <h3>Management Consulting</h3>
-      <b>$555.000</b>
-    </DonorCard>
-
-    <DonorCard>
-      <Img />
-      <h2>Deloitte</h2>
-      <h3>Management Consulting</h3>
-      <b>$555.000</b>
-    </DonorCard>
+    {org.transactions.map(transaction =>
+     <DonorCard>
+        <Img style={{backgroundImage: `url(${userImageApiUrl(transaction.user.avatarFilename)})`}} />
+        <h2>{transaction.user.name}</h2>
+        <b>{transaction.amount / 100.0} {transaction.currency}</b>
+      </DonorCard>
+    )}
   </DonorList>
 </Layout>
 

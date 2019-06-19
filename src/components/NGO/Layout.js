@@ -316,7 +316,9 @@ const Layout = ({organization, children, store}) => {
         </div>
 
         <div id='supportBox'>
-          <a href="/asd" className='btn'>Support</a>
+          <Link to={`/app/ngo/${organization.id}/support`} className='btn'>
+            Support
+          </Link>
         </div>
       </OrganizationData>
     </HeaderContainer>
@@ -327,16 +329,12 @@ const Layout = ({organization, children, store}) => {
           <h3>472t</h3>
         </div>
         <div className='item'>
-          <h2>Jobs / ha </h2>
+          <h2>Trees planted</h2>
           <h3>6203</h3>
         </div>
         <div className='item'>
-          <h2>Biomass / ha</h2>
+          <h2>Jobs created</h2>
           <h3>165</h3>
-        </div>
-        <div className='item'>
-          <h2>Funds received</h2>
-          <h3>$3.7M</h3>
         </div>
       </StatsBox>
       {children}

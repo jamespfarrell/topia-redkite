@@ -14,6 +14,7 @@ import NgoPage from '../components/NGO/Page'
 import NgoProjects from '../components/NGO/Project'
 import NgoDonors from '../components/NGO/Donors'
 import NgoAbout from '../components/NGO/About'
+import NgoSupport from '../components/NGO/Support'
 
 const App = () => (
   <Router>
@@ -29,6 +30,7 @@ const App = () => (
     <NgoProjects path='/app/ngo/:id/projects' />
     <NgoDonors path='/app/ngo/:id/donors' />
     <NgoAbout path='/app/ngo/:id/about' />
+    <NgoSupport path='/app/ngo/:id/support' />
   </Router>
 )
 
