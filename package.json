@@ -22,6 +22,7 @@
     "gatsby-plugin-react-leaflet": "^2.0.10",
     "gatsby-plugin-react-svg": "^2.1.1",
     "gatsby-plugin-sass": "^2.0.11",
+    "gatsby-plugin-stripe": "^1.2.1",
     "gatsby-plugin-styled-components": "^3.0.7",
     "leaflet": "^1.5.1",
     "mobx": "^5.9.4",
@@ -38,6 +39,7 @@
     "react-facebook": "^8.0.4",
     "react-helmet": "^5.2.1",
     "react-leaflet": "^2.4.0",
+    "react-stripe-elements": "^3.0.0",
     "react-tooltip": "^3.10.0",
     "styled-components": "^4.2.0"
   },

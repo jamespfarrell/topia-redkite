@@ -16,6 +16,12 @@ module.exports = {
       }
     },
     'gatsby-plugin-sass',
+    {
+      resolve: `gatsby-plugin-stripe`,
+      options: {
+        async: true,
+      },
+    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
