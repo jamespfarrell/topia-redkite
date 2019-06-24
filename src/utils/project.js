@@ -2,7 +2,7 @@ import axios from 'axios'
 import { projectUrl, organizationProjectUrl } from './routing'
 const isBrowser = typeof window !== `undefined`
 
-export const updateProject = async ({ token, id, name, bannerFile, coordinates, startAt, sdgTargetIds }) => {
+export const updateProject = async ({ token, description, id, name, bannerFile, coordinates, startAt, sdgTargetIds }) => {
   if (!isBrowser) return {}
 
   let formData = new FormData()
@@ -10,6 +10,7 @@ export const updateProject = async ({ token, id, name, bannerFile, coordinates, 
     formData.append('bannerFile', bannerFile)
   }
   formData.append('name', name)
+  formData.append('description', description)
   formData.append('coordinates', JSON.stringify(coordinates))
   formData.append('startAt', startAt)
   formData.append('sdgTargetIds', JSON.stringify(sdgTargetIds))

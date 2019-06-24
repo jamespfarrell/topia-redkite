@@ -319,12 +319,17 @@ const Layout = ({organization, children, store}) => {
               <TopiaSvg />
             </Link>
           </div>
-          <div id='userBox' onClick={() => navigate('/app/profile')}>
-            {store.CurrentUser.user.name}
-            <MiniAvatar
-              user={store.CurrentUser.user}
-            />
-          </div>
+          {store.CurrentUser.isLoggedIn &&
+            <div id='userBox' onClick={() => navigate('/app/profile')}>
+              {store.CurrentUser.user.name}
+              <MiniAvatar
+                user={store.CurrentUser.user}
+              />
+            </div>
+          }
+          {!store.CurrentUser.isLoggedIn &&  <div id='userBox' onClick={() => navigate('/app/login')}>
+              Login
+            </div>}
         </div>
       </Top>
       <OrganizationData>

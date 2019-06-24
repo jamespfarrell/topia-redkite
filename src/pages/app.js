@@ -30,7 +30,7 @@ const App = () => (
     <NgoProjects path='/app/ngo/:id/projects' />
     <NgoDonors path='/app/ngo/:id/donors' />
     <NgoAbout path='/app/ngo/:id/about' />
-    <NgoSupport path='/app/ngo/:id/support' />
+    <PrivateRoute path="/app/ngo/:id/support" component={NgoSupport} />
   </Router>
 )
 
