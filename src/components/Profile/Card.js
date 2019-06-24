@@ -19,6 +19,12 @@ export const Card = styled.form`
   .header {
     display: flex;
     justify-content: space-between;
+
+    a {
+      text-decoration: none;
+      color: #959ba6;
+      font-weight: bold;
+    }
   }
 
   h1 {

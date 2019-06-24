@@ -12,7 +12,7 @@ export const getOrganization = async (id) => {
 }
 
 
-export const updateOrganization = async ({ token, id, name, logoFile, bannerFile }) => {
+export const updateOrganization = async ({ token, id, name, url, location, logoFile, bannerFile }) => {
   if (!isBrowser) return {}
 
   let formData = new FormData()
@@ -23,6 +23,8 @@ export const updateOrganization = async ({ token, id, name, logoFile, bannerFile
     formData.append('bannerFile', bannerFile)
   }
   formData.append('name', name)
+  formData.append('url', url)
+  formData.append('location', location)
 
   const config = {
     headers: {

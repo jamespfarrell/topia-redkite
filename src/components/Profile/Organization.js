@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import { inject, observer } from 'mobx-react'
-import { navigate } from 'gatsby'
+import { navigate, Link } from 'gatsby'
 import { ConfirmationBar, Line, UploadInput, InputWithLabel, SuccessButton, SubmitButton } from '../Form'
 import { Card, Preview, FormContainer, SaveBtnContainer } from './Card'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import BannerSvg from '../../assets/svgs/banner-default.svg'
 import { updateOrganization } from '../../utils/organization'
 
-const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
+const Organization = ({store, id, name, url, location, logoUrl, bannerUrl}) => {
   const { token } = store.CurrentUser
   const [orgParams, setOrgParams] = useState({
-    id, name, logoUrl, bannerUrl
+    id, name, logoUrl, bannerUrl, url, location
   })
   const [ showConfirmation, setConfirmation] = useState(false)
 
   const handleOrganizationFileUpload = e => {
     const file = e.target.files[0]
-    console.log(file)
     const urlParam = e.target.name === 'logoFile' ? 'logoUrl' : 'bannerUrl'
     setOrgParams({
       ...orgParams,
@@ -46,7 +45,10 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
     <div className='header'>
       <div>
         <h1>Organization</h1>
-        <p>You can change your organization details here.</p>
+        <p>
+          You can change your organization details here.
+          <br /><Link to={`/app/ngo/${id}`}>Preview</Link>
+        </p>
       </div>
       <SaveBtnContainer>
         <SubmitButton label='Save' />
@@ -95,6 +97,20 @@ const Organization = ({store, id, name, logoUrl, bannerUrl}) => {
         label='Organization name'
         type='text'
         name='name'
+      />
+      <InputWithLabel
+        handleUpdate={handleUpdate}
+        value={orgParams.url}
+        label='URL'
+        type='text'
+        name='url'
+      />
+      <InputWithLabel
+        handleUpdate={handleUpdate}
+        value={orgParams.location}
+        label='Location'
+        type='text'
+        name='location'
       />
     </FormContainer>
     <Line />

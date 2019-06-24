@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import styled, { createGlobalStyle } from 'styled-components'
 import TopiaSvg from '../../assets/svgs/topia.svg'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { inject } from 'mobx-react'
 import AvatarSvg from '../../assets/svgs/user-avatar-default.svg'
 import { userImageApiUrl } from '../../utils/routing'
+import { transaction } from 'mobx'
+import ReactTooltip from 'react-tooltip'
 
 const PageStyle = createGlobalStyle`
   html {
@@ -22,7 +24,7 @@ const PageStyle = createGlobalStyle`
 `
 
 const HeaderContainer = styled.div`
-  background: #24b35f;
+  background: #082a16;
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -55,6 +57,7 @@ const Top = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 2;
 
   #container {
     width: 100%;
@@ -79,6 +82,11 @@ const Top = styled.div`
       color: #ffffff;
       display: inline-flex;
       align-items: center;
+      cursor: pointer;
+
+      svg {
+        margin-left: 14px;
+      }
 
       #avatar {
         width: 40px;
@@ -96,6 +104,7 @@ const OrganizationData = styled.div`
   max-width: 940px;
   height: 96px;
   display: flex;
+  z-index: 2;
 
   @media only screen and (max-width: 768px) {
     flex-wrap: wrap;
@@ -110,6 +119,7 @@ const OrganizationData = styled.div`
     height: 96px;
     background: #fff;
     margin-right: 32px;
+    background-size: cover;
 
     @media only screen and (max-width: 768px) {
       margin: 0;
@@ -123,6 +133,15 @@ const OrganizationData = styled.div`
 
     @media only screen and (max-width: 768px) {
       width: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+    }
+
+    a:hover {
+      opacity: .8;
     }
 
     h1 {
@@ -195,6 +214,7 @@ const OrganizationData = styled.div`
         border: solid 1px rgba(204, 206, 210, 0.4);
         background-color: #000000;
         margin: 4px;
+        background-size: cover;
       }
     }
   }
@@ -254,6 +274,19 @@ const StatsBox = styled.div`
   }
 `
 
+const BannerContainer = styled.div`
+  opacity: .45;
+  z-index: 0;
+  background-position: center;
+  width: 100%;
+  height: 345px;
+  position: absolute;
+
+  @media only screen and (max-width: 768px) {
+    height: 397px;
+  }
+`
+
 const MiniAvatar = ({user}) => {
   const { avatarFilename } = user
   const avatar = avatarFilename
@@ -263,11 +296,22 @@ const MiniAvatar = ({user}) => {
   return avatar
 }
 
+const OrganizationUrl = ({children}) => {
+  if(children)
+    return <a href={children}>
+      {children.replace(/(http||https):\/\//, "")}
+    </a>
+  else {
+    return null
+  }
+}
+
 const Layout = ({organization, children, store}) => {
 
   return <div>
     <PageStyle />
     <HeaderContainer>
+      {organization.bannerUrl && <BannerContainer style={{backgroundImage: `url(${organization.bannerUrl})`}} />}
       <Top>
         <div id='container'>
           <div id='logoBox'>
@@ -275,17 +319,19 @@ const Layout = ({organization, children, store}) => {
               <TopiaSvg />
             </Link>
           </div>
-          <div id='userBox'>
+          <div id='userBox' onClick={() => navigate('/app/profile')}>
             {store.CurrentUser.user.name}
-            <MiniAvatar user={store.CurrentUser.user} />
+            <MiniAvatar
+              user={store.CurrentUser.user}
+            />
           </div>
         </div>
       </Top>
       <OrganizationData>
-        <div id='logo'></div>
+        <div id='logo' style={{backgroundImage: `url(${organization.logoUrl})`}}></div>
         <div id='titleBox'>
           <h1>{organization.name}</h1>
-          <h2>Tomohon, Sulawesi Utara · masarang.nl</h2>
+          <h2>{organization.location} · <OrganizationUrl>{organization.url}</OrganizationUrl></h2>
           <MetricBall style={{border: 'solid 2px #00a721', backgroundColor: 'rgba(0, 167, 33, 0.2)'}}>
             2
           </MetricBall>
@@ -308,9 +354,13 @@ const Layout = ({organization, children, store}) => {
         <div id='topDonors'>
           Top Donors
           <div id='donorsContainer'>
-            <div className='donor'></div>
-            <div className='donor'></div>
-            <div className='donor'></div>
+            {organization.transactions.slice(0, 3).map(transaction =>
+              <div
+                key={transaction.id}
+                className='donor'
+                style={{backgroundImage: `url(${userImageApiUrl(transaction.user.avatarFilename)})`}}
+              ></div>
+            )}
           </div>
 
         </div>
@@ -326,15 +376,23 @@ const Layout = ({organization, children, store}) => {
       <StatsBox>
         <div className='item'>
           <h2>CO₂ Reduction</h2>
-          <h3>472t</h3>
+          <h3>5412.5t</h3>
         </div>
         <div className='item'>
           <h2>Trees planted</h2>
-          <h3>6203</h3>
+          <h3>1082500</h3>
         </div>
         <div className='item'>
           <h2>Jobs created</h2>
-          <h3>165</h3>
+          <h3>1687
+          </h3>
+        </div>
+
+        <div className='item'>
+          <h2>Funds received</h2>
+          <h3>
+            {organization.totalDonations ? organization.totalDonations : '-'}
+          </h3>
         </div>
       </StatsBox>
       {children}

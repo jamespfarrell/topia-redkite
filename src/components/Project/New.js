@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { inject } from 'mobx-react'
 import SEO from '../SEO'
 import UserLayout from '../UserLayout'
-import { Line, SubmitButton, InputWithLabel } from '../Form'
-import { Card, FormContainer, SaveBtnContainer } from '../Profile/Card'
+import { Line, SubmitButton, InputWithLabel, UploadInput, LongText } from '../Form'
+import { Card, FormContainer, SaveBtnContainer, Preview } from '../Profile/Card'
 import Map from './Map'
 import MultiSelect from '@kenshooui/react-multi-select'
 import '@kenshooui/react-multi-select/dist/style.css'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.min.css"
 import "./New.scss"
-import { organizationProjectUrl, sdgTargetsUrl } from '../../utils/routing'
+import { sdgTargetsUrl } from '../../utils/routing'
+import { createProject } from '../../utils/project'
 import axios from 'axios'
+import BannerSvg from '../../assets/svgs/banner-default.svg'
+import { navigate } from 'gatsby'
 
 const New = ({store, orgId}) => {
   const { token } = store.CurrentUser
@@ -24,7 +27,9 @@ const New = ({store, orgId}) => {
   const [projectParams, setProjectParams] = useState({
     coordinates: [],
     sdgTargetIds: [],
-    startAt: new Date()
+    sattelite_url: '',
+    startAt: new Date(),
+    bannerUrl: null
   })
 
   useEffect(() => {
@@ -54,14 +59,30 @@ const New = ({store, orgId}) => {
     setProjectParams({...projectParams, startAt })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    axios.post(organizationProjectUrl(orgId), projectParams, axiosConfig)
+    const response = await createProject({ token, orgId, ...projectParams })
+    console.log(response)
+
+    if (response.status === 200) {
+      navigate('/app/profile#profile')
+    }
   }
 
   const handleGoals = (items) => {
     setProjectParams({...projectParams, sdgTargetIds: items.map(item => item.id) })
   }
+
+  const handleBannerFileUpload = e => {
+    const file = e.target.files[0]
+
+    setProjectParams({
+      ...projectParams,
+      [e.target.name]: file,
+      bannerUrl: URL.createObjectURL(file)
+    })
+  }
+
 
   return (
     <UserLayout>
@@ -86,6 +107,20 @@ const New = ({store, orgId}) => {
             selected={projectParams.startAt}
             onChange={(date) => handleDate(date)}
           />
+          <InputWithLabel handleUpdate={handleUpdate} label='Sattelite map url' type='text' name='sattelite_url' />
+          <p><b>Banner</b></p>
+          <div className='row'>
+            <div className='col' style={{marginRight: '24px'}}>
+              {projectParams.bannerUrl ? <Preview url={projectParams.bannerUrl} /> : <BannerSvg />}
+            </div>
+            <div className='col'>
+              <UploadInput handler={handleBannerFileUpload} name='bannerFile'>
+                Upload banner
+              </UploadInput>
+            </div>
+          </div>
+          <p><b>Description</b></p>
+          <LongText rows="7" onChange={handleUpdate} name='description'></LongText>
           <p><b>Goals</b></p>
           </FormContainer>
           <MultiSelect

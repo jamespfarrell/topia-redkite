@@ -14,6 +14,10 @@ const SubMenu = styled.div`
 
   ul {
     list-display-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 
     li {
       font-size: 14px;
@@ -99,7 +103,7 @@ const DonorCard = styled.div`
 `
 
 const Page = (props) => {
-  const [ org, setOrg ] = React.useState({name: '', transactions: [], projects: []})
+  const [ org, setOrg ] = React.useState({url: '', name: '', transactions: [], projects: []})
 
   React.useEffect(() => {
     const fetchOrganization = async () => {

@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import SEO from '../SEO'
 import { getOrganization } from '../../utils/organization'
+import { projectBannerApiUrl } from '../../utils/routing'
 
 const SubMenu = styled.div`
   width: 100%;
@@ -13,6 +14,10 @@ const SubMenu = styled.div`
 
   ul {
     list-display-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 
     li {
       font-size: 14px;
@@ -66,6 +71,7 @@ const Img = styled.div `
   width: 100%;
   height: 200px;
   background: gray;
+  background-size: cover;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
 `
@@ -82,10 +88,27 @@ const Content = styled.div `
     margin: 0;
   }
 
+  a {
+    color: #383a44;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
   p {
     font-size: 14px;
     line-height: 1.57;
     color: #7e808c;
+  }
+
+  .text {
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    height: 86px;
+    overflow: hidden;
   }
 
   .sdgs {
@@ -109,7 +132,7 @@ const SdgBubble = styled.div`
 `
 
 const Page = (props) => {
-  const [ org, setOrg ] = React.useState({name: '', projects: []})
+  const [ org, setOrg ] = React.useState({url: '', name: '', transactions: [], projects: []})
 
   React.useEffect(() => {
     const fetchOrganization = async () => {
@@ -133,16 +156,15 @@ const Page = (props) => {
     <ProjectList>
       {org.projects.map(project =>
         <ProjectCard key={project.id}>
-          <Img />
+          <Img style={{backgroundImage: `url(${projectBannerApiUrl(project.bannerFilename)})`}}/>
           <Content>
             <h2>{project.name}</h2>
-            <p>
-            Masarang has reforestation projects in both Sulawesi and Borneo.
-            With the principles of agroforestry, an ecologically responsible
-            farming system, forest cover is maintained alongside sustainable
-            production of food and other natural resources.
-            </p>
-
+            <p className='text'>{project.description}</p>
+            {project.sattelite_url && <p className='sattelite'>
+              <a href={project.sattelite_url}>
+                Sattelite photos
+              </a>
+            </p>}
             <div className='sdgs'>
               <p>Supported SDGs</p>
               <SdgBubble color="#00a721">2</SdgBubble>

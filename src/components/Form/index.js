@@ -136,6 +136,22 @@ const UploadContainer = styled.div`
   }
 `
 
+export const LongText = styled.textarea`
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: solid 1px #b8bcc3;
+  background-color: #ffffff;
+  font-size: 16px;
+  -webkit-appearance: none;
+  outline: none;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  line-height: 1.5;
+`
+
 export const ConfirmationBar = styled.div`
   position: fixed;
   top: 0px;

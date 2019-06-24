@@ -30,3 +30,4 @@ export const sdgTargetsUrl = `${API_URL}/sdg_targets`
 export const oauthFacebookUrl = `${API_URL}/oauth/facebook`
 export const projectUrl = (id) => `${API_URL}/projects/${id}`
 export const transactionsUrl = `${API_URL}/transactions`
+export const projectBannerApiUrl = filename => `${API_URL}/uploads/projects/${filename}`

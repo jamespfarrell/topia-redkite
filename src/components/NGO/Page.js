@@ -4,6 +4,47 @@ import styled from 'styled-components'
 import { Link } from 'gatsby'
 import SEO from '../SEO'
 import { getOrganization } from '../../utils/organization'
+import 'react-vis/dist/style.css'
+import { XYPlot, LineSeries, HorizontalGridLines, XAxis, YAxis } from 'react-vis'
+
+const co2data = [
+  {x: '2009', y: 2275},
+  {x: '2010', y: 2650},
+  {x: '2011', y: 3150},
+  {x: '2012', y: 3856.25},
+  {x: '2013', y: 4356.25},
+  {x: '2014', y: 4856.25},
+  {x: '2015', y: 5356.25},
+  {x: '2016', y: 5356.25},
+  {x: '2017', y: 5356.25},
+  {x: '2018', y: 5412.5}
+]
+
+const treesdata = [
+  {x: '2009', y: 455000},
+  {x: '2010', y: 530000},
+  {x: '2011', y: 630000},
+  {x: '2012', y: 771250},
+  {x: '2013', y: 871250},
+  {x: '2014', y: 971250},
+  {x: '2015', y: 1071250},
+  {x: '2016', y: 1071250},
+  {x: '2017', y: 1071250},
+  {x: '2018', y: 1082500}
+]
+
+const jobsData = [
+  {x: '2009', y: 1251},
+  {x: '2010', y: 1278.8},
+  {x: '2011', y: 1306.6},
+  {x: '2012', y: 1387.2},
+  {x: '2013', y: 1416.1},
+  {x: '2014', y: 1445},
+  {x: '2015', y: 1473.9},
+  {x: '2016', y: 1560.6},
+  {x: '2017', y: 1676.2},
+  {x: '2018', y: 1687.8}
+]
 
 const SubMenu = styled.div`
   width: 100%;
@@ -13,6 +54,10 @@ const SubMenu = styled.div`
 
   ul {
     list-display-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 
     li {
       font-size: 14px;
@@ -52,6 +97,7 @@ const ImpactCard = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.05), 0 2px 14px 0 rgba(0, 0, 0, 0.05);
   background-color: #ffffff;
   display: flex;
+  margin-bottom: 16px;
 
   @media only screen and (max-width: 768px) {
     flex-wrap: wrap;
@@ -64,7 +110,15 @@ const ImpactCard = styled.div`
   .graph {
     background: #FAFAFB;
     width: 60%;
-    padding: 48px;
+    padding: 6px;
+
+    svg {
+      overflow: visible;
+    }
+
+    .rv-xy-plot {
+      right: -30px;
+    }
 
     @media only screen and (max-width: 768px) {
       width: 100%;
@@ -111,7 +165,7 @@ const ImpactCard = styled.div`
 
 const Page = (props) => {
 
-  const [ org, setOrg ] = React.useState({})
+  const [ org, setOrg ] = React.useState({url: '', transactions: []})
 
   React.useEffect(() => {
     const fetchOrganization = async () => {
@@ -137,18 +191,66 @@ const Page = (props) => {
       <ImpactCard>
         <div className='info'>
           <h1>CO₂ reductions in metric tons</h1>
-          <h2>472</h2>
+          <h2>5412.5</h2>
           <p>
           The activities of Masarang may take place in Indonesia but they play a global role.
           After all, the problems in Indonesia have an impact on the entire planet.
           </p>
           <div className='projects'>
-            <p>Projects</p>
           </div>
         </div>
 
         <div className='graph'>
-          Graph here
+          <XYPlot height={320} width={360} xType="ordinal">
+            <LineSeries data={co2data} />
+            <XAxis title="Year" />
+            <YAxis title="CO2 absorption in tons" />
+            <HorizontalGridLines />
+          </XYPlot>
+        </div>
+      </ImpactCard>
+
+      <ImpactCard>
+        <div className='info'>
+          <h1>Trees planted</h1>
+          <h2>1082500</h2>
+          <p>
+          The activities of Masarang may take place in Indonesia but they play a global role.
+          After all, the problems in Indonesia have an impact on the entire planet.
+          </p>
+          <div className='projects'>
+          </div>
+        </div>
+
+        <div className='graph'>
+          <XYPlot height={340} width={360} xType="ordinal">
+            <LineSeries data={treesdata} />
+            <XAxis title="Year" />
+            <YAxis title="Number of trees planted" />
+            <HorizontalGridLines />
+          </XYPlot>
+        </div>
+      </ImpactCard>
+
+      <ImpactCard>
+        <div className='info'>
+          <h1>Jobs created</h1>
+          <h2>1687</h2>
+          <p>
+          The activities of Masarang may take place in Indonesia but they play a global role.
+          After all, the problems in Indonesia have an impact on the entire planet.
+          </p>
+          <div className='projects'>
+          </div>
+        </div>
+
+        <div className='graph'>
+          <XYPlot height={320} width={360} xType="ordinal">
+            <LineSeries data={jobsData} />
+            <XAxis title="Year" />
+            <YAxis title="Number of jobs created" />
+            <HorizontalGridLines />
+          </XYPlot>
         </div>
       </ImpactCard>
   </Layout>

@@ -27,6 +27,10 @@ const SubMenu = styled.div`
 
   ul {
     list-display-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 
     li {
       font-size: 14px;
@@ -147,7 +151,7 @@ const CardForm = injectStripe(_CardForm)
 
 const Page = ({store, id}) => {
   const [ success, setSuccessFlag ] = React.useState(false)
-  const [ org, setOrg ] = React.useState({name: '', projects: []})
+  const [ org, setOrg ] = React.useState({url: '', name: '', transactions: [], projects: []})
   const [ paymentParams, setPaymentParams ] = React.useState({
     currency: 'EUR',
     amount: '10',
