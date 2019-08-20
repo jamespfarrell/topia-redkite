@@ -6,7 +6,7 @@ import linkedinSvg from '../icons/linkedin.svg'
 import instagramSvg from '../icons/instagram.svg'
 import topiaSvg from '../icons/topia.svg'
 import earthM from '../assets/earth-m.png'
-import earthL from '../assets/earth-l.png'
+import earthNew from '../assets/earth-new.png'
 import { Link } from 'gatsby'
 
 const LandingPageStyle = createGlobalStyle`
@@ -17,7 +17,7 @@ const LandingPageStyle = createGlobalStyle`
     background: #000;
     color: #fff;
     @media only screen and (min-width: 768px) {
-      background-image: url(${earthL});
+      background-image: url(${earthNew});
       background-repeat: no-repeat;
       background-position: top right;
     }
