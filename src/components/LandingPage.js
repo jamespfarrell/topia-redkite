@@ -124,7 +124,7 @@ const RightMenu = styled.div`
 export default ({children}) => (
   <React.Fragment>
     <RightMenu>
-      <Link to='/app/login'>Login</Link>
+      {/* <Link to='/app/login'>Login</Link> */}
     </RightMenu>
     <Container>
       <Top>
