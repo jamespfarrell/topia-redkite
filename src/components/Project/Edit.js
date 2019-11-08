@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { inject } from 'mobx-react'
 import SEO from '../SEO'
 import UserLayout from '../UserLayout'
-import { Line, SubmitButton, InputWithLabel } from '../Form'
-import { Card, FormContainer, SaveBtnContainer } from '../Profile/Card'
+import { Line, SubmitButton, InputWithLabel, UploadInput, LongText } from '../Form'
+import { Card, FormContainer, SaveBtnContainer, Preview } from '../Profile/Card'
 import Map from './Map'
 import MultiSelect from '@kenshooui/react-multi-select'
 import '@kenshooui/react-multi-select/dist/style.css'
@@ -13,6 +13,8 @@ import "./New.scss"
 import { projectUrl, sdgTargetsUrl } from '../../utils/routing'
 import axios from 'axios'
 import Confirmation from '../UserLayout/Confirmation'
+import BannerSvg from '../../assets/svgs/banner-default.svg'
+import { updateProject } from '../../utils/project'
 
 const Edit = ({store, projectId}) => {
   const { token } = store.CurrentUser
@@ -26,9 +28,13 @@ const Edit = ({store, projectId}) => {
   const [sdgTargets, setSdgTargets] = useState([])
   const [projectParams, setProjectParams] = useState({
     name: '',
+    description: '',
+    sattelite_url: '',
     coordinates: [],
     sdgTargetIds: [],
-    startAt: new Date()
+    startAt: new Date(),
+    bannerUrl: null,
+    bannerFile: null
   })
 
   useEffect(() => {
@@ -37,8 +43,11 @@ const Edit = ({store, projectId}) => {
 
       setProjectParams({
         ...projectParams,
+        sattelite_url: response.data.sattelite_url,
+        description: response.data.description,
+        bannerUrl: response.data.bannerUrl,
         name: response.data.name,
-        coordinates: response.data.coordinates,
+        coordinates: response.data.coordinates || [],
         startAt: new Date(response.data.startAt),
         sdgTargetIds: response.data.sdg_targets.map(tar => tar.id)
       })
@@ -79,8 +88,8 @@ const Edit = ({store, projectId}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const response = await axios.put(projectUrl(projectId), projectParams, axiosConfig)
-
+    const response = await updateProject({ token, id: projectId, ...projectParams })
+    console.log(response)
     if(response) {
       setConfirmation(true)
       setTimeout(() => setConfirmation(false), 3000)
@@ -89,6 +98,16 @@ const Edit = ({store, projectId}) => {
 
   const handleGoals = (items) => {
     setProjectParams({...projectParams, sdgTargetIds: items.map(item => item.id) })
+  }
+
+  const handleBannerFileUpload = e => {
+    const file = e.target.files[0]
+
+    setProjectParams({
+      ...projectParams,
+      [e.target.name]: file,
+      bannerUrl: URL.createObjectURL(file)
+    })
   }
 
   return (
@@ -121,6 +140,26 @@ const Edit = ({store, projectId}) => {
             selected={projectParams.startAt}
             onChange={(date) => handleDate(date)}
           />
+          <InputWithLabel
+            value={projectParams.sattelite_url}
+            handleUpdate={handleUpdate}
+            label='Sattelite map url'
+            type='text'
+            name='sattelite_url'
+          />
+          <p><b>Banner</b></p>
+          <div className='row'>
+            <div className='col' style={{marginRight: '24px'}}>
+              {projectParams.bannerUrl ? <Preview url={projectParams.bannerUrl} /> : <BannerSvg />}
+            </div>
+            <div className='col'>
+              <UploadInput handler={handleBannerFileUpload} name='bannerFile'>
+                Upload banner
+              </UploadInput>
+            </div>
+          </div>
+          <p><b>Description</b></p>
+          <LongText rows="7" onChange={handleUpdate} name='description'>{projectParams.description}</LongText>
           <p><b>Goals</b></p>
           </FormContainer>
           <MultiSelect

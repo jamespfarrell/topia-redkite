@@ -27,10 +27,7 @@ const Profile = ({store}) => {
       <Basic />
       {organizations.map(org => <Organization
         key={org.id}
-        id={org.id}
-        name={org.name}
-        logoUrl={org.logoUrl}
-        bannerUrl={org.bannerUrl}
+        {...org}
       />)}
       <a id="#organization"></a>
       <Account />

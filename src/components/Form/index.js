@@ -8,7 +8,7 @@ export const ErrMsg = styled.p`
   text-align: center;
 `
 
-const Label = styled.label`
+export const Label = styled.label`
   display: block;
   font-family: Inter;
   font-size: 14px;
@@ -20,7 +20,7 @@ const Label = styled.label`
     color: ${props => props.hasError ? "#ff5500" : "#212c30"};
   }
 
-  input {
+  input, select {
     margin-top: 8px;
     display: block;
     width: 100%;
@@ -134,6 +134,22 @@ const UploadContainer = styled.div`
     top: 0;
     opacity: 0;
   }
+`
+
+export const LongText = styled.textarea`
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  border-radius: 3px;
+  border: solid 1px #b8bcc3;
+  background-color: #ffffff;
+  font-size: 16px;
+  -webkit-appearance: none;
+  outline: none;
+  padding: 18px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  line-height: 1.5;
 `
 
 export const ConfirmationBar = styled.div`
