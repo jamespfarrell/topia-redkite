@@ -65,7 +65,15 @@ public
 yarn-error.log
 .pnp/
 .pnp.js
+
 # Yarn Integrity file
 .yarn-integrity
 .env.development
 .env.production
+
+# Server stuff
+dhparam-2048.pem
+docker-compose.prop.yml
+docker-compose.yml
+nginx.prod.conf
+nginx.staging.conf
