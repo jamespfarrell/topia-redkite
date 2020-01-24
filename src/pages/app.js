@@ -28,7 +28,10 @@ const App = () => (
     <ActivateAccount path='/app/activate/:token' />
     <NgoPage path='/app/ngo/:id' />
     <NgoProjects path='/app/ngo/:id/projects' />
+    <NewProject path='/app/ngo/:id/projects/new' />
+    
     <NgoDonors path='/app/ngo/:id/donors' />
+    
     <NgoAbout path='/app/ngo/:id/about' />
     <PrivateRoute path="/app/ngo/:id/support" component={NgoSupport} />
   </Router>

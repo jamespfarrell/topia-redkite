@@ -154,7 +154,7 @@ const Page = (props) => {
       </ul>
     </SubMenu>
     <ProjectList>
-      {org.projects.map(project =>
+      {(org.projects ? org.projects.map(project =>
         <ProjectCard key={project.id}>
           <Img style={{backgroundImage: `url(${projectBannerApiUrl(project.bannerFilename)})`}}/>
           <Content>
@@ -173,7 +173,7 @@ const Page = (props) => {
             </div>
           </Content>
         </ProjectCard>
-      )}
+      ): null)}
     </ProjectList>
   </Layout>
 }

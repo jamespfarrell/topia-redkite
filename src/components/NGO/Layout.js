@@ -359,13 +359,13 @@ const Layout = ({organization, children, store}) => {
         <div id='topDonors'>
           Top Donors
           <div id='donorsContainer'>
-            {organization.transactions.slice(0, 3).map(transaction =>
+            {(organization.transactions ? organization.transactions.slice(0, 3).map(transaction =>
               <div
                 key={transaction.id}
                 className='donor'
                 style={{backgroundImage: `url(${userImageApiUrl(transaction.user.avatarFilename)})`}}
               ></div>
-            )}
+            ) : null)}
           </div>
 
         </div>

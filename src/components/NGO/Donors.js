@@ -125,13 +125,13 @@ const Page = (props) => {
     </ul>
   </SubMenu>
   <DonorList>
-    {org.transactions.map(transaction =>
+    {org.transactions ? org.transactions.map(transaction =>
      <DonorCard>
         <Img style={{backgroundImage: `url(${userImageApiUrl(transaction.user.avatarFilename)})`}} />
         <h2>{transaction.user.name}</h2>
         <b>{transaction.amount / 100.0} {transaction.currency}</b>
       </DonorCard>
-    )}
+    ): null}
   </DonorList>
 </Layout>
 
