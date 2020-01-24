@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = process.env.API_URL
+const API_URL = process.env.API_URL ? process.env.API_URL : 'http://localhost:3000'
 
 export const get = async (route, token, params = {}) =>
   await axios.get(route, {

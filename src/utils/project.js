@@ -1,6 +1,16 @@
 import axios from 'axios'
-import { projectUrl, organizationProjectUrl } from './routing'
+import { projectUrl, organizationProjectUrl, adminOrganizationsUrl } from './routing'
 const isBrowser = typeof window !== `undefined`
+
+export const getAllProjects = async (id) => {
+  try {
+    const response = await axios.get(adminOrganizationsUrl)
+  
+    return response.data
+  } catch (e) {
+    return e.response.data
+  }
+}
 
 export const updateProject = async ({ token, description, id, name, bannerFile, coordinates, startAt, sdgTargetIds }) => {
   if (!isBrowser) return {}
