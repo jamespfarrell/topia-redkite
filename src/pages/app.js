@@ -16,6 +16,7 @@ import NgoDonors from '../components/NGO/Donors'
 import NgoAbout from '../components/NGO/About'
 import NgoSupport from '../components/NGO/Support'
 import RedKite from '../components/RedKite/Projects'
+import Home from "../components/Home"
 
 const App = () => (
   <Router>
@@ -27,7 +28,7 @@ const App = () => (
     <PrivateRoute path="/app/organizations/:orgId/project/new" component={NewProject} />
 
     <PrivateRoute path="/app/red-kite/projects" component={RedKite} />
-
+    <Home path="/app/home" />
     <Login path="/app/login" />
     <ActivateAccount path='/app/activate/:token' />
     <NgoPage path='/app/ngo/:id' />
