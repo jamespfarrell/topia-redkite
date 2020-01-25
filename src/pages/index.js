@@ -123,7 +123,7 @@ export default () => {
     <FormContainer>
       <Header>We accelerate social impact.</Header>
       <SubHeader>
-        Stay in the loop and get early access when we’re ready for the main stage.
+        Stay in the loop and get early access when we open public access.
       </SubHeader>
       <EmailInput
         status={status}
