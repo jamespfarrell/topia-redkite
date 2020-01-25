@@ -16,6 +16,13 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 
+  if (page.path.match(/^\/redkite/)) {
+    page.matchPath = `/redkite/*`
+
+    // Update the page.
+    createPage(page)
+  }
+
   if (page.path.match(/^\/admin/)) {
     page.matchPath = `/admin/*`
 

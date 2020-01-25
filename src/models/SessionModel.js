@@ -13,6 +13,7 @@ class SessionModel {
   }
 
   Login(user) {
+    debugger
     this.CurrentUser = user
   }
 
