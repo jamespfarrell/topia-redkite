@@ -99,7 +99,7 @@ const ProjectForm = ({store, orgId}) => {
         <Line />
         <FormContainer>
           <InputWithLabel handleUpdate={handleUpdate} label='Name' type='text' name='name' />
-          Select project!!!! {organisations.map(o => `<h5>${o.id}-${o.name}<h5>`)}
+          {/* Select project!!!! {organisations.map(o => `<h5>${o.id}-${o.name}<h5>`)} */}
           <p><b>Start date</b></p>
           <DatePicker
             className='projectDatePicker'
