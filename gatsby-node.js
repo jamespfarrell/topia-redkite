@@ -17,7 +17,7 @@ exports.onCreatePage = async ({ page, actions }) => {
   }
 
 
-  console.log(`page.path ---> : ${page.path}`)
+  // console.log(`page.path ---> : ${page.path}`)
   if (page.path.match(/^\/redkite/)) {
     // const oldPage = Object.assign({}, page)
     // const replacePath = path => path.replace(/^\/redkite/, ``)
