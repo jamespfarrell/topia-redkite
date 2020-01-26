@@ -5,7 +5,7 @@
  */
 
 exports.onCreatePage = async ({ page, actions }) => {
-  const { createPage } = actions
+  const { createPage, deletePage } = actions
 
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
@@ -16,9 +16,27 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page)
   }
 
-  if (page.path.match(/^\/redkite/)) {
-    page.matchPath = `/redkite/*`
 
+  console.log(`page.path ---> : ${page.path}`)
+  if (page.path.match(/^\/redkite/)) {
+    // const oldPage = Object.assign({}, page)
+    // const replacePath = path => path.replace(/^\/redkite/, ``)
+    
+    // // Remove trailing slash unless page is /
+    // console.log(`page.path ---> : ${page.path}`)
+    // page.path = replacePath(page.path)
+    // console.log(`replacePath ---> : ${page.path}`)
+
+    // if (page.path !== oldPage.path) {
+    //   // Replace new page with old page
+    //   deletePage(oldPage)
+    //   createPage(page)
+    // }
+    
+    
+    
+    page.matchPath = `/*`
+    // page.matchPath = `/redkite/*`
     // Update the page.
     createPage(page)
   }

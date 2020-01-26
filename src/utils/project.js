@@ -5,7 +5,7 @@ const isBrowser = typeof window !== `undefined`
 export const getAllProjects = async (id) => {
   try {
     const response = await axios.get(adminOrganizationsUrl)
-  
+    
     return response.data
   } catch (e) {
     return e.response.data
