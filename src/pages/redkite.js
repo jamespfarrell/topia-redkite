@@ -15,6 +15,7 @@ const App = () => (
     <Login path="login" />
     <RedKite path=":orgStub/projects" />
     <RedKite path="projects" />
+    <RedKite path="/" />
   </Router>
 )
 
