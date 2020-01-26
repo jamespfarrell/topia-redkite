@@ -15,13 +15,6 @@ module.exports = {
         linkStyles: true // (default: true) Enable/disable loading stylesheets via CDN
       }
     },
-    'gatsby-plugin-sass',
-    {
-      resolve: `gatsby-plugin-stripe`,
-      options: {
-        async: true,
-      },
-    },
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
