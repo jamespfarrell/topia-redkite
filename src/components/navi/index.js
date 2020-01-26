@@ -93,7 +93,9 @@ const Navi = (props) => {
             >
                 <a className="nav-link" onClick={openModal}>Create </a>
               
-            </li> : null)}
+            </li> : <Link to="/app/login" className="nav-link">
+                Log in
+              </Link>)}
           </ul>
         </div>
         <div className="navbar-nav flex-row ml-md-auto d-none d-md-flex" />
