@@ -10,6 +10,7 @@ const App = () => (
     <Home path="indexx" />
     <RedKite path=":orgStub/projects" />
     <RedKite path="projects" />
+    <RedKite path="/" />
   </Router>
 )
 
