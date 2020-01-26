@@ -7,7 +7,7 @@ import RedKite from '../components/RedKite/Projects'
 
 const App = () => (
   <Router>
-    <Home path="/redkite/index" />
+    <Home path="/indexx" />
     <RedKite path="/redkite/:orgStub/projects" />
     
   </Router>
